@@ -81,7 +81,11 @@ export class Api extends EventEmitter {
         }
 
         const headers = options.json
-          ? { Accept: "application/json", "Content-Type": "application/json" }
+          ? {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "Referrer-Policy": "no-referrer-when-downgrade",
+            }
           : {};
 
         if (IFRAMED) {

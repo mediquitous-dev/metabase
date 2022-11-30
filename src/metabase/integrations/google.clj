@@ -58,11 +58,12 @@
 
 (define-multi-setting-impl google.i/google-auth-auto-create-accounts-domain :oss
   :getter (fn [] (setting/get-value-of-type :string :google-auth-auto-create-accounts-domain))
-  :setter (fn [domain]
-              (when (and domain (str/includes? domain ","))
-                ;; Multiple comma-separated domains is EE-only feature
-                (throw (ex-info (tru "Invalid domain") {:status-code 400})))
-              (setting/set-value-of-type! :string :google-auth-auto-create-accounts-domain domain)))
+  :setter (fn [domain] (setting/set-value-of-type! :string :google-auth-auto-create-accounts-domain domain)))
+  ;; :setter (fn [domain]
+  ;;             (when (and domain (str/includes? domain ","))
+  ;;               ;; Multiple comma-separated domains is EE-only feature
+  ;;               (throw (ex-info (tru "Invalid domain") {:status-code 400})))
+  ;;             (setting/set-value-of-type! :string :google-auth-auto-create-accounts-domain domain)))
 
 (def ^:private google-auth-token-info-url "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=%s")
 
